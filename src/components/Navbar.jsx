@@ -69,6 +69,7 @@ zIndex: 1000
   <nav style={{ display: "flex", gap: "25px", alignItems: "center" }}>
 
     <Link to="/" style={linkStyle}>Home</Link>
+    <Link to="/about" style={linkStyle}>About</Link>
     <Link to="/products" style={linkStyle}>Products</Link>
 
     {loggedIn ? (

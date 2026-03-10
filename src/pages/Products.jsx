@@ -7,7 +7,7 @@ function Products() {
   const [products, setProducts] = useState([])
   const [size, setSize] = useState("")
   const [color, setColor] = useState("")
-  const [toast, setToast] = useState({ show: false, message: "" }) 
+  const [toast, setToast] = useState({ show: false, message: "" })
   const { addToCart } = useContext(CartContext)
   const { wishlist, addToWishlist } = useContext(WishlistContext)
 
@@ -36,37 +36,52 @@ function Products() {
   }, [size, color])
 
   return (
-    <div style={{ padding: "40px 5%", fontFamily: "'Inter', sans-serif" }}>
-      <h2 style={{ fontSize: "32px", marginBottom: "30px" }}>Our Collection</h2>
-
+    <div style={{ padding: "60px 5%", fontFamily: "'Inter', sans-serif", backgroundColor: "#fff" }}>
+      
+      {/* --- REFINED TOAST --- */}
       <div style={{
         position: "fixed",
         bottom: "30px",
         right: "30px",
         backgroundColor: "#111",
         color: "white",
-        padding: "15px 25px",
-        borderRadius: "8px",
-        boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
+        padding: "16px 28px",
+        borderRadius: "12px",
+        boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
         transform: toast.show ? "translateY(0)" : "translateY(150%)",
-        transition: "transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
-        zIndex: 1000,
+        transition: "transform 0.5s cubic-bezier(0.19, 1, 0.22, 1)",
+        zIndex: 2000,
         display: "flex",
         alignItems: "center",
-        gap: "10px",
+        gap: "12px",
         fontSize: "14px",
-        fontWeight: "500"
+        border: "1px solid rgba(255,255,255,0.1)"
       }}>
-        <span style={{ color: "#4BB543" }}>✓</span> {toast.message}
+        <div style={{ background: "#4BB543", width: "20px", height: "20px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "10px" }}>✓</div>
+        {toast.message}
       </div>
 
-      <div style={{ marginBottom: "40px", display: "flex", gap: "20px", alignItems: "center" }}>
-        <div>
-          <label style={{ fontWeight: "600", marginRight: "10px" }}>Size:</label>
+      <div style={{ textAlign: "center", marginBottom: "60px" }}>
+        <h2 style={{ fontSize: "42px", fontWeight: "800", marginBottom: "10px", letterSpacing: "-1px" }}>Our Collection</h2>
+        <p style={{ color: "#666", fontSize: "16px" }}>Premium essentials crafted for Dhaka`s lifestyle.</p>
+      </div>
+
+      {/* --- FILTER BAR --- */}
+      <div style={{ 
+        display: "flex", 
+        justifyContent: "center", 
+        gap: "20px", 
+        marginBottom: "50px",
+        padding: "20px",
+        borderTop: "1px solid #eee",
+        borderBottom: "1px solid #eee"
+      }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <span style={{ fontSize: "14px", fontWeight: "600", color: "#888" }}>SIZE</span>
           <select 
             value={size} 
             onChange={(e) => setSize(e.target.value)}
-            style={{ padding: "8px", borderRadius: "4px", border: "1px solid #ddd", outline: "none" }}
+            style={{ padding: "10px 20px", borderRadius: "30px", border: "1px solid #ddd", outline: "none", cursor: "pointer", fontWeight: "500" }}
           >
             <option value="">All Sizes</option>
             <option value="S">S</option>
@@ -76,12 +91,12 @@ function Products() {
           </select>
         </div>
 
-        <div>
-          <label style={{ fontWeight: "600", marginRight: "10px" }}>Color:</label>
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <span style={{ fontSize: "14px", fontWeight: "600", color: "#888" }}>COLOR</span>
           <select 
             value={color} 
             onChange={(e) => setColor(e.target.value)}
-            style={{ padding: "8px", borderRadius: "4px", border: "1px solid #ddd", outline: "none" }}
+            style={{ padding: "10px 20px", borderRadius: "30px", border: "1px solid #ddd", outline: "none", cursor: "pointer", fontWeight: "500" }}
           >
             <option value="">All Colors</option>
             <option value="White">White</option>
@@ -91,83 +106,107 @@ function Products() {
         </div>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "30px" }}>
+      {/* --- PRODUCT GRID --- */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "40px" }}>
         {products.map((product) => {
           const isFavorited = wishlist.some(item => String(item.id) === String(product.id));
 
           return (
             <div
               key={product.id}
+              className="product-card"
               style={{
-                border: "1px solid #f0f0f0",
-                borderRadius: "12px",
-                padding: "20px",
                 background: "white",
-                transition: "all 0.3s ease",
-                boxShadow: "0 4px 15px rgba(0,0,0,0.05)",
+                transition: "all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1)",
                 display: "flex",
                 flexDirection: "column",
+                position: "relative"
               }}
-              onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-5px)"}
-              onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-8px)";
+                e.currentTarget.querySelector('.cart-btn').style.opacity = "1";
+                e.currentTarget.querySelector('.cart-btn').style.transform = "translateY(0)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.querySelector('.cart-btn').style.opacity = "0";
+                e.currentTarget.querySelector('.cart-btn').style.transform = "translateY(10px)";
+              }}
             >
-              <Link to={`/product/${product.id}`} style={{ textDecoration: "none", color: "black" }}>
-                <div style={{ overflow: "hidden", borderRadius: "8px", marginBottom: "15px" }}>
+              <div style={{ position: "relative", overflow: "hidden", borderRadius: "16px", marginBottom: "20px" }}>
+                <Link to={`/product/${product.id}`}>
                   <img
                     src={product.image}
                     alt={product.name}
-                    style={{ width: "100%", height: "280px", objectFit: "cover", transition: "transform 0.5s ease" }}
+                    style={{ width: "100%", height: "380px", objectFit: "cover", transition: "transform 0.6s ease" }}
+                    onMouseEnter={(e) => e.target.style.transform = "scale(1.05)"}
+                    onMouseLeave={(e) => e.target.style.transform = "scale(1)"}
                   />
-                </div>
-                <h3 style={{ fontSize: "18px", margin: "10px 0" }}>{product.name}</h3>
-              </Link>
-
-              <p style={{ fontSize: "20px", fontWeight: "700", color: "#111", marginBottom: "20px" }}>
-                ৳ {product.price}
-              </p>
-
-              <div style={{ display: "flex", gap: "10px", marginTop: "auto" }}>
+                </Link>
+                
+                {/* Wishlist Icon Overlay */}
                 <button
+                  onClick={() => addToWishlist(product)}
+                  style={{
+                    position: "absolute",
+                    top: "15px",
+                    right: "15px",
+                    background: isFavorited ? "#111" : "rgba(255,255,255,0.9)",
+                    color: isFavorited ? "#fff" : "#111",
+                    border: "none",
+                    width: "35px",
+                    height: "35px",
+                    borderRadius: "50%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    cursor: "pointer",
+                    boxShadow: "0 5px 15px rgba(0,0,0,0.1)",
+                    zIndex: 2
+                  }}
+                >
+                  {isFavorited ? "♥" : "♡"}
+                </button>
+
+                {/* Modern Hover Quick-Add */}
+                <button
+                  className="cart-btn"
                   onClick={() => {
                     addToCart(product);
                     triggerToast(product.name);
                   }}
                   style={{
-                    flex: 2,
-                    padding: "12px",
+                    position: "absolute",
+                    bottom: "15px",
+                    left: "15px",
+                    right: "15px",
                     background: "#111",
                     color: "white",
                     border: "none",
-                    borderRadius: "6px",
-                    cursor: "pointer",
-                    fontWeight: "600",
-                    transition: "opacity 0.2s"
-                  }}
-                  onMouseDown={(e) => e.target.style.opacity = "0.7"}
-                  onMouseUp={(e) => e.target.style.opacity = "1"}
-                >
-                  Add to Cart
-                </button>
-                
-                <button
-                  onClick={() => addToWishlist(product)}
-                  style={{
-                    flex: 1,
                     padding: "12px",
-                    background: isFavorited ? "#ff7272" : "transparent",
-                    color: isFavorited ? "#fff" : "#111",
-                    border: "1px solid #111",
-                    borderRadius: "6px",
+                    borderRadius: "8px",
+                    fontWeight: "600",
                     cursor: "pointer",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "18px",
-                    transition: "all 0.2s ease"
+                    opacity: "0",
+                    transform: "translateY(10px)",
+                    transition: "all 0.3s ease",
+                    zIndex: 2
                   }}
                 >
-                  {isFavorited ? "♥" : "♡"}
+                  Add to Bag
                 </button>
+              </div>
+
+              <div style={{ padding: "0 5px" }}>
+                <p style={{ fontSize: "12px", color: "#888", fontWeight: "600", textTransform: "uppercase", letterSpacing: "1.2px", marginBottom: "5px" }}>
+                  {product.category || "New Arrival"}
+                </p>
+                <Link to={`/product/${product.id}`} style={{ textDecoration: "none" }}>
+                  <h3 style={{ fontSize: "18px", fontWeight: "700", color: "#111", margin: "0 0 8px 0" }}>{product.name}</h3>
+                </Link>
+                <p style={{ fontSize: "17px", fontWeight: "500", color: "#333", margin: 0 }}>
+                  ৳ {product.price}
+                </p>
               </div>
             </div>
           );
