@@ -1,112 +1,40 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { createContext, useState, useEffect } from "react";
+import PropTypes from "prop-types";
+export const CartContext = createContext(); 
 
-function Orders() {
-  const [orders, setOrders] = useState([]);
-  const [setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+export function CartProvider({ children }) {
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
-    async function loadOrders() {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        setError("Please login to view your orders.");
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const res = await fetch("https://final-exam-delta-two.vercel.app/api/orders/", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Token ${token}` 
-          }
-        });
-        const data = await res.json();
-        if (res.ok) {
-          setOrders(Array.isArray(data) ? data : []);
-        } else {
-          setError(data.detail || "You do not have permission to view this page.");
-        }
-      } catch {
-        setError("Network error. Could not connect to Dhaka Threads server.");
-      } finally {
-        setLoading(false);
-      }
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) {
+      setCart(JSON.parse(savedCart));
     }
-    loadOrders();
   }, []);
 
-  const getStatusStyles = (status) => {
-    const s = (status || "").toLowerCase();
-    if (s === 'paid' || s === 'delivered') {
-      return { bg: '#e1f5e6', color: '#2ecc71', border: '#c3e6cb' };
-    }
-    if (s === 'shipped') {
-      return { bg: '#e3f2fd', color: '#3498db', border: '#bbdefb' };
-    }
-    return { bg: '#fff4e5', color: '#f39c12', border: '#ffeeba' };
-  };
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
-  if (loading) return <div style={{ padding: "100px", textAlign: "center" }}>Loading your orders...</div>;
+  function addToCart(product) {
+    setCart([...cart, product]);
+  }
+
+  function removeFromCart(id) {
+    setCart(cart.filter(item => item.id !== id));
+  }
+
+  function clearCart() {
+    setCart([]);
+    localStorage.removeItem("cart");
+  }
 
   return (
-    <div style={{ padding: "40px 8%", fontFamily: "'Inter', sans-serif", minHeight: "80vh" }}>
-      <h2 style={{ fontSize: "32px", marginBottom: "40px", fontWeight: "700" }}>My Orders</h2>
-
-      {orders.length === 0 ? (
-        <div style={{ padding: "60px", textAlign: "center", background: "#f9f9f9", borderRadius: "16px" }}>
-          <p>You have not placed any orders yet.</p>
-          <Link to="/products" style={{ color: "#111", fontWeight: "700" }}>Start Shopping</Link>
-        </div>
-      ) : (
-        <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-          {orders.map((order) => {
-            const styles = getStatusStyles(order.status);
-            return (
-              <div
-                key={order.id}
-                style={{
-                  border: "1px solid #eee",
-                  padding: "25px 35px",
-                  borderRadius: "16px",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  background: "#fff",
-                  boxShadow: "0 2px 10px rgba(0,0,0,0.02)"
-                }}
-              >
-                <div>
-                  <p style={{ margin: "0 0 5px 0", color: "#888", fontSize: "13px" }}>Order #{order.id}</p>
-                  <h3 style={{ margin: "0 0 8px 0", fontSize: "22px", fontWeight: "800" }}>৳ {order.total_amount}</h3>
-                  <p style={{ margin: 0, fontSize: "13px", color: "#aaa" }}>
-                    {order.created_at ? new Date(order.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : "Recently"}
-                  </p>
-                </div>
-
-                <div>
-                  <span style={{ 
-                    padding: "8px 20px", 
-                    borderRadius: "30px", 
-                    fontSize: "12px", 
-                    fontWeight: "700",
-                    textTransform: "uppercase",
-                    background: styles.bg,
-                    color: styles.color,
-                    border: `1px solid ${styles.border}`
-                  }}>
-                    {order.status || "Pending"}
-                  </span>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
-    </div>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart }}>
+      {children}
+    </CartContext.Provider>
   );
 }
-
-export default Orders;
+CartProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
