@@ -104,7 +104,7 @@ function About() {
       <section style={{ padding: "0 8% 100px 8%" }}>
         <div style={{ 
           height: "500px", 
-          background: "url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1470')", 
+          background: "url('https://winrock.org/wp-content/uploads/2016/02/WEA-1.jpg')", 
           backgroundSize: "cover", 
           backgroundPosition: "center",
           borderRadius: "30px",
