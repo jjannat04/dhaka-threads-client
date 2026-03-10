@@ -308,8 +308,13 @@ const AdminDashboard = () => {
                             <div className="form-row">
                                 <div className="input-group">
                                     <label>Category ID</label>
+                                    <p style={{fontSize: '11px', color: '#666', margin: '0 0 5px 0'}}>
+                                        1: Panjabi | 2: Saree | 3: Lungi | 4: Accessories
+                                    </p>
                                     <input 
-                                        type="number" placeholder="1, 2, etc." required
+                                        type="number" 
+                                        placeholder="1, 2, etc." 
+                                        required
                                         value={productForm.category}
                                         onChange={(e) => setProductForm({...productForm, category: e.target.value})}
                                     />

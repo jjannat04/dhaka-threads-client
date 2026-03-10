@@ -1,10 +1,24 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState, useContext } from "react"; // Added useContext
+import { Link, useLocation } from "react-router-dom"; // Added useLocation
+import { CartContext } from "../context/CartContext"; // Import your context
 
 function Orders() {
   const [orders, setOrders] = useState([]);
-  const [setError] = useState(null);
+  const [error, setError] = useState(null); // Fixed setError usage
   const [loading, setLoading] = useState(true);
+  
+  const { clearCart } = useContext(CartContext); // Get clearCart function
+  const location = useLocation();
+
+  // --- EFFECT TO CLEAR CART AFTER SUCCESSFUL PAYMENT ---
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get("payment") === "success") {
+      clearCart();
+      // Optional: Clean the URL so the cart doesn't clear again on refresh
+      window.history.replaceState({}, document.title, "/orders");
+    }
+  }, [location, clearCart]);
 
   useEffect(() => {
     async function loadOrders() {
@@ -50,6 +64,7 @@ function Orders() {
   };
 
   if (loading) return <div style={{ padding: "100px", textAlign: "center" }}>Loading your orders...</div>;
+  if (error) return <div style={{ padding: "100px", textAlign: "center", color: "red" }}>{error}</div>;
 
   return (
     <div style={{ padding: "40px 8%", fontFamily: "'Inter', sans-serif", minHeight: "80vh" }}>
