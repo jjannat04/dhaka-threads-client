@@ -103,3 +103,12 @@ button {
 button:hover {
   opacity: 0.85;
 }
+
+* {
+box-sizing: border-box;
+}
+
+img {
+max-width: 100%;
+height: auto;
+}

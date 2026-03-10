@@ -37,74 +37,152 @@ function Wishlist() {
   }
 
   return (
-    <div style={{ padding: "40px 8%", fontFamily: "'Inter', sans-serif" }}>
-      {/* AESTHETIC TOAST */}
-      <div style={{
-        position: "fixed",
-        bottom: "30px",
-        right: "30px",
-        backgroundColor: "#111",
-        color: "white",
-        padding: "15px 25px",
-        borderRadius: "8px",
-        boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
-        transform: toast.show ? "translateY(0)" : "translateY(150%)",
-        transition: "transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
-        zIndex: 1000,
-        fontSize: "14px"
-      }}>
+    <div
+      style={{
+        padding: "clamp(20px,5vw,40px) clamp(16px,8%,120px)",
+        fontFamily: "'Inter', sans-serif"
+      }}
+    >
+      {/* TOAST */}
+      <div
+        style={{
+          position: "fixed",
+          bottom: "20px",
+          right: "20px",
+          maxWidth: "90%",
+          backgroundColor: "#111",
+          color: "white",
+          padding: "14px 22px",
+          borderRadius: "8px",
+          boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
+          transform: toast.show ? "translateY(0)" : "translateY(150%)",
+          transition: "transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+          zIndex: 1000,
+          fontSize: "14px"
+        }}
+      >
         ✓ {toast.message}
       </div>
 
-      <header style={{ borderBottom: "1px solid #eee", marginBottom: "40px", paddingBottom: "20px" }}>
-        <h2 style={{ fontSize: "32px", fontWeight: "700" }}>My Wishlist</h2>
+      {/* HEADER */}
+      <header
+        style={{
+          borderBottom: "1px solid #eee",
+          marginBottom: "40px",
+          paddingBottom: "20px"
+        }}
+      >
+        <h2
+          style={{
+            fontSize: "clamp(24px,4vw,32px)",
+            fontWeight: "700"
+          }}
+        >
+          My Wishlist
+        </h2>
+
         <p style={{ color: "#888" }}>{wishlist.length} items saved</p>
       </header>
-      
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "30px" }}>
+
+      {/* PRODUCT GRID */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+          gap: "28px"
+        }}
+      >
         {wishlist.map((product) => (
-          <div 
-            key={product.id} 
-            style={{ 
-              border: "1px solid #f0f0f0", 
-              padding: "20px", 
-              borderRadius: "12px", 
+          <div
+            key={product.id}
+            style={{
+              border: "1px solid #f0f0f0",
+              padding: "20px",
+              borderRadius: "12px",
               position: "relative",
               background: "#fff",
               transition: "box-shadow 0.3s ease"
             }}
           >
-            <button 
+            <button
               onClick={() => {
                 removeFromWishlist(product.id);
                 triggerToast("Removed from wishlist");
               }}
-              style={{ 
-                position: "absolute", right: "15px", top: "15px", background: "#fff", 
-                border: "1px solid #eee", borderRadius: "50%", width: "30px", height: "30px", 
-                cursor: "pointer", fontSize: "12px", zIndex: 2 
+              style={{
+                position: "absolute",
+                right: "15px",
+                top: "15px",
+                background: "#fff",
+                border: "1px solid #eee",
+                borderRadius: "50%",
+                width: "30px",
+                height: "30px",
+                cursor: "pointer",
+                fontSize: "12px",
+                zIndex: 2
               }}
             >
               ✕
             </button>
 
             <Link to={`/product/${product.id}`} style={{ textDecoration: "none", color: "inherit" }}>
-              <div style={{ overflow: "hidden", borderRadius: "8px", height: "300px", marginBottom: "15px" }}>
-                <img src={product.image} alt={product.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <div
+                style={{
+                  overflow: "hidden",
+                  borderRadius: "8px",
+                  height: "clamp(220px,40vw,300px)",
+                  marginBottom: "15px"
+                }}
+              >
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover"
+                  }}
+                />
               </div>
-              <h3 style={{ fontSize: "18px", marginBottom: "8px", fontWeight: "600" }}>{product.name}</h3>
-              <p style={{ fontSize: "19px", fontWeight: "700", color: "#111", marginBottom: "20px" }}>৳ {product.price}</p>
+
+              <h3
+                style={{
+                  fontSize: "18px",
+                  marginBottom: "8px",
+                  fontWeight: "600"
+                }}
+              >
+                {product.name}
+              </h3>
+
+              <p
+                style={{
+                  fontSize: "19px",
+                  fontWeight: "700",
+                  color: "#111",
+                  marginBottom: "20px"
+                }}
+              >
+                ৳ {product.price}
+              </p>
             </Link>
-            
-            <button 
+
+            <button
               onClick={() => {
                 addToCart(product);
-                removeFromWishlist(product.id); // MOVES ITEM TO CART
+                removeFromWishlist(product.id);
                 triggerToast(`${product.name} moved to bag!`);
               }}
-              style={{ 
-                width: "100%", padding: "14px", background: "#111", color: "#fff", 
-                border: "none", borderRadius: "6px", cursor: "pointer", fontWeight: "600"
+              style={{
+                width: "100%",
+                padding: "14px",
+                background: "#111",
+                color: "#fff",
+                border: "none",
+                borderRadius: "6px",
+                cursor: "pointer",
+                fontWeight: "600"
               }}
             >
               Add to Cart

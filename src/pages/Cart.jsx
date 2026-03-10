@@ -27,15 +27,21 @@ function Cart() {
   }
 
   return (
-    <div style={{ padding: "40px 8%", fontFamily: "'Inter', sans-serif", backgroundColor: "#fff" }}>
+    <div style={{
+      padding: "clamp(20px,5vw,40px) clamp(16px,8%,120px)",
+      fontFamily: "'Inter', sans-serif",
+      backgroundColor: "#fff"
+    }}>
      
+      {/* TOAST */}
       <div style={{
         position: "fixed",
-        bottom: "10px",
-        right: "10px",
+        bottom: "15px",
+        right: "15px",
+        maxWidth: "90%",
         backgroundColor: "#0b0a0a",
         color: "white",
-        padding: "15px 25px",
+        padding: "14px 22px",
         borderRadius: "8px",
         boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
         transform: toast.show ? "translateY(0)" : "translateY(150%)",
@@ -46,23 +52,71 @@ function Cart() {
         {toast.message}
       </div>
 
-      <h2 style={{ fontSize: "32px", marginBottom: "40px", fontWeight: "700" }}>Shopping Cart</h2>
+      <h2 style={{
+        fontSize: "clamp(24px,4vw,32px)",
+        marginBottom: "40px",
+        fontWeight: "700"
+      }}>
+        Shopping Cart
+      </h2>
 
-      <div style={{ display: "flex", gap: "50px", flexWrap: "wrap", alignItems: "flex-start" }}>
-        <div style={{ flex: "2", minWidth: "350px" }}>
+      <div style={{
+        display: "flex",
+        gap: "50px",
+        flexWrap: "wrap",
+        alignItems: "flex-start"
+      }}>
+
+        {/* CART ITEMS */}
+        <div style={{ flex: "2", minWidth: "280px" }}>
           {cart.map((item) => (
-            <div key={item.id} style={{ display: "flex", gap: "20px", padding: "20px 0", borderBottom: "1px solid #eee", alignItems: "center" }}>
-              <img src={item.image} alt={item.name} style={{ width: "120px", height: "140px", objectFit: "cover", borderRadius: "8px" }} />
-              <div style={{ flex: "1" }}>
+            <div
+              key={item.id}
+              style={{
+                display: "flex",
+                gap: "18px",
+                padding: "20px 0",
+                borderBottom: "1px solid #eee",
+                alignItems: "center",
+                flexWrap: "wrap"
+              }}
+            >
+              <img
+                src={item.image}
+                alt={item.name}
+                style={{
+                  width: "clamp(90px,20vw,120px)",
+                  height: "clamp(110px,24vw,140px)",
+                  objectFit: "cover",
+                  borderRadius: "8px"
+                }}
+              />
+
+              <div style={{ flex: "1", minWidth: "180px" }}>
                 <h3 style={{ fontSize: "18px", margin: "0 0 5px 0" }}>{item.name}</h3>
-                <p style={{ color: "#777", fontSize: "14px", marginBottom: "10px" }}>Size: {item.size || "M"}</p>
-                <p style={{ fontWeight: "700", fontSize: "18px" }}>৳ {item.price}</p>
+
+                <p style={{ color: "#777", fontSize: "14px", marginBottom: "10px" }}>
+                  Size: {item.size || "M"}
+                </p>
+
+                <p style={{ fontWeight: "700", fontSize: "18px" }}>
+                  ৳ {item.price}
+                </p>
+
                 <button 
                   onClick={() => {
                     removeFromCart(item.id);
                     triggerToast("Item removed from bag");
                   }}
-                  style={{ marginTop: "10px", background: "none", border: "none", color: "#ff4757", cursor: "pointer", textDecoration: "underline", fontSize: "14px" }}
+                  style={{
+                    marginTop: "10px",
+                    background: "none",
+                    border: "none",
+                    color: "#ff4757",
+                    cursor: "pointer",
+                    textDecoration: "underline",
+                    fontSize: "14px"
+                  }}
                 >
                   Remove item
                 </button>
@@ -71,24 +125,60 @@ function Cart() {
           ))}
         </div>
 
-        <div style={{ flex: "1", minWidth: "300px", background: "#fafafa", padding: "30px", borderRadius: "12px", position: "sticky", top: "100px" }}>
-          <h3 style={{ fontSize: "20px", marginBottom: "20px", borderBottom: "1px solid #ddd", paddingBottom: "10px" }}>Order Summary</h3>
+        {/* ORDER SUMMARY */}
+        <div style={{
+          flex: "1",
+          minWidth: "260px",
+          background: "#fafafa",
+          padding: "clamp(20px,4vw,30px)",
+          borderRadius: "12px",
+          position: "sticky",
+          top: "100px"
+        }}>
+          <h3 style={{
+            fontSize: "20px",
+            marginBottom: "20px",
+            borderBottom: "1px solid #ddd",
+            paddingBottom: "10px"
+          }}>
+            Order Summary
+          </h3>
+
           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "15px" }}>
             <span>Subtotal</span>
             <span>৳ {subtotal}</span>
           </div>
-          
+
           <hr style={{ border: "0", borderTop: "1px solid #ddd", margin: "20px 0" }} />
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "30px", fontSize: "20px", fontWeight: "700" }}>
+
+          <div style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginBottom: "30px",
+            fontSize: "20px",
+            fontWeight: "700"
+          }}>
             <span>Total</span>
             <span>৳ {total}</span>
           </div>
+
           <Link to="/checkout" style={{ textDecoration: "none" }}>
-            <button style={{ width: "100%", padding: "16px", background: "#111", color: "#fff", border: "none", borderRadius: "8px", fontSize: "16px", fontWeight: "600", cursor: "pointer" }}>
+            <button style={{
+              width: "100%",
+              padding: "16px",
+              background: "#111",
+              color: "#fff",
+              border: "none",
+              borderRadius: "8px",
+              fontSize: "16px",
+              fontWeight: "600",
+              cursor: "pointer"
+            }}>
               Checkout Now
             </button>
           </Link>
         </div>
+
       </div>
     </div>
   )
