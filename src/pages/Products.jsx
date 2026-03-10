@@ -7,12 +7,10 @@ function Products() {
   const [products, setProducts] = useState([])
   const [size, setSize] = useState("")
   const [color, setColor] = useState("")
-  const [toast, setToast] = useState({ show: false, message: "" }) // Toast state
-
+  const [toast, setToast] = useState({ show: false, message: "" }) 
   const { addToCart } = useContext(CartContext)
   const { wishlist, addToWishlist } = useContext(WishlistContext)
 
-  // Show aesthetic toast notification
   const triggerToast = (productName) => {
     setToast({ show: true, message: `${productName} added to bag!` })
     setTimeout(() => setToast({ show: false, message: "" }), 3000)
@@ -41,7 +39,6 @@ function Products() {
     <div style={{ padding: "40px 5%", fontFamily: "'Inter', sans-serif" }}>
       <h2 style={{ fontSize: "32px", marginBottom: "30px" }}>Our Collection</h2>
 
-      {/* AESTHETIC TOAST NOTIFICATION */}
       <div style={{
         position: "fixed",
         bottom: "30px",
@@ -63,7 +60,6 @@ function Products() {
         <span style={{ color: "#4BB543" }}>✓</span> {toast.message}
       </div>
 
-      {/* FILTERS */}
       <div style={{ marginBottom: "40px", display: "flex", gap: "20px", alignItems: "center" }}>
         <div>
           <label style={{ fontWeight: "600", marginRight: "10px" }}>Size:</label>
@@ -95,7 +91,6 @@ function Products() {
         </div>
       </div>
 
-      {/* PRODUCT GRID */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "30px" }}>
         {products.map((product) => {
           const isFavorited = wishlist.some(item => String(item.id) === String(product.id));

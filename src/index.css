@@ -69,15 +69,12 @@ button:focus-visible {
 }
 
 
-/* Reset spacing */
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Global font */
 
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -86,7 +83,6 @@ body {
   background: #ffffff46;
 }
 
-/* Better links */
 
 a {
   text-decoration: none;
@@ -98,7 +94,6 @@ a:hover {
   color: #000;
 }
 
-/* Buttons */
 
 button {
   cursor: pointer;

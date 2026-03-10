@@ -28,7 +28,7 @@ function Cart() {
 
   return (
     <div style={{ padding: "40px 8%", fontFamily: "'Inter', sans-serif", backgroundColor: "#fff" }}>
-      {/* AESTHETIC TOAST */}
+     
       <div style={{
         position: "fixed",
         bottom: "10px",

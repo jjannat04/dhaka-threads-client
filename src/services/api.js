@@ -17,13 +17,13 @@ export async function getProductReviews(id) {
 }
 
 export async function createReview(reviewData) {
-  const token = localStorage.getItem("token"); // Get the logged-in user's token
+  const token = localStorage.getItem("token");
 
   const response = await fetch(`${API_BASE}/reviews/`, {
     method: "POST",
     headers: { 
       "Content-Type": "application/json",
-      "Authorization": `Token ${token}` // Send the token to Django
+      "Authorization": `Token ${token}` 
     },
     body: JSON.stringify(reviewData),
   });

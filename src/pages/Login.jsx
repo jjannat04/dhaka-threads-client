@@ -16,18 +16,16 @@ function Login() {
       const res = await loginUser({ username, password })
       console.log("Server Response:", res)
 
-      // We now expect 'token' from our updated api_views.py
       if (res.message === "Login successful" && res.token) {
         localStorage.setItem("token", res.token) 
         localStorage.setItem("user", username)
         
         localStorage.setItem("is_admin", res.isAdmin)
         
-        alert("Welcome back, " + username + "!")
+        // alert("Welcome back, " + username + "!")
         navigate("/")
         window.location.reload() 
       } else {
-        // If message is success but no token, it's a backend config issue
         const errorMsg = res.error || (res.message === "Login successful" ? "Server failed to provide a token" : "Invalid credentials")
         alert("Login failed: " + errorMsg)
       }

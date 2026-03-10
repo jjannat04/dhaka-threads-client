@@ -6,13 +6,11 @@ function Success() {
   const { setCart } = useContext(CartContext);
   const [searchParams] = useSearchParams();
   
-  // SSLCommerz usually sends a transaction ID (tran_id) back
   const transactionId = searchParams.get("tran_id");
 
   useEffect(() => {
-    // Clear the cart since the order is paid
     setCart([]);
-    localStorage.removeItem("cart"); // If you persist cart in localStorage
+    localStorage.removeItem("cart"); 
   }, [setCart]);
 
   return (

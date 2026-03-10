@@ -46,7 +46,6 @@ function Orders() {
     if (s === 'shipped') {
       return { bg: '#e3f2fd', color: '#3498db', border: '#bbdefb' };
     }
-    // Default is Pending
     return { bg: '#fff4e5', color: '#f39c12', border: '#ffeeba' };
   };
 

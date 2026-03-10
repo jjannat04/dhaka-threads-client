@@ -13,10 +13,6 @@ import Activate from "./pages/Activate";
 import Success from "./pages/Success";
 import AdminDashboard from './components/AdminDashboard';
 
-// Inside your <Routes>
-
-
-// Inside <Routes>...
 
 function App() {
   return (

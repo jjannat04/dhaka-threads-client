@@ -18,7 +18,6 @@ function Register() {
       const res = await registerUser({ username, email, password })
       console.log("Registration Response:", res)
 
-      // Assuming your backend returns a success indicator
       if (res) {
         setIsRegistered(true)
       }
@@ -29,7 +28,6 @@ function Register() {
     }
   }
 
-  // Success State View
   if (isRegistered) {
     return (
       <div style={{ height: "80vh", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Inter', sans-serif" }}>

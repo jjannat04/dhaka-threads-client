@@ -5,13 +5,11 @@ function Checkout() {
   const { cart } = useContext(CartContext)
   const [loading, setLoading] = useState(false)
   
-  // State for required shipping fields
   const [formData, setFormData] = useState({
     full_name: "",
     address: ""
   })
 
-  // 1. Fixed calculation logic: Using parseFloat and sum
   const totalAmount = cart.reduce((acc, item) => {
     const price = parseFloat(item.price) || 0;
     return acc + price;
@@ -28,7 +26,6 @@ function Checkout() {
 
     setLoading(true);
     try {
-      // 2. Create Order with cleaned numeric data
       const orderRes = await fetch(
         "https://final-exam-delta-two.vercel.app/api/orders/create/",
         {
@@ -40,10 +37,10 @@ function Checkout() {
           body: JSON.stringify({
             full_name: formData.full_name,
             address: formData.address,
-            total_amount: totalAmount.toFixed(2), // Clean decimal format for Django
+            total_amount: totalAmount.toFixed(2), 
             items: cart.map(item => ({
-    product: Number(item.id), // The "Dictionary" needs the 'product' key
-    quantity: 1               // And the quantity key
+    product: Number(item.id),
+    quantity: 1             
 }))
           })
         }
@@ -52,14 +49,12 @@ function Checkout() {
       const orderData = await orderRes.json();
       console.log("Order Response:", orderData);
 
-      // If order creation failed, stop here
       if (!orderRes.ok) {
         alert("Order failed: " + JSON.stringify(orderData));
         setLoading(false);
         return;
       }
 
-      // 3. Initiate SSLCommerz payment using the created order
       const paymentRes = await fetch(
         "https://final-exam-delta-two.vercel.app/api/create-payment/",
         {
@@ -78,8 +73,6 @@ function Checkout() {
       const paymentData = await paymentRes.json();
       console.log("Payment Response:", paymentData);
 
-      // 4. Redirect to the gateway
-      // Checking multiple common key names for the URL
       const redirectUrl = paymentData.gateway_url || paymentData.payment_url || paymentData.GatewayPageURL;
 
       if (redirectUrl) {

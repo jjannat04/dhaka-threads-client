@@ -32,7 +32,7 @@ function ProductDetail() {
 
   useEffect(() => {
     loadData();
-  }, [loadData]); // loadData is now a stable dependency
+  }, [loadData]); 
 async function handleReviewSubmit(e) {
   e.preventDefault();
   const token = localStorage.getItem("token");
@@ -53,7 +53,7 @@ async function handleReviewSubmit(e) {
 
     setComment("");
     setRating(5);
-    await loadData(); // Refresh list
+    await loadData(); 
     alert("Review posted successfully!");
   } catch  {
     alert("Could not post review. Make sure you are logged in.");
@@ -70,10 +70,9 @@ async function handleReviewSubmit(e) {
   return (
     <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "40px 20px", fontFamily: "'Inter', sans-serif" }}>
       
-      {/* UPPER SECTION: PRODUCT INFO */}
+
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))", gap: "60px", marginBottom: "80px" }}>
-        
-        {/* IMAGE LEFT */}
+     
         <div style={{ background: "#f9f9f9", borderRadius: "12px", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center" }}>
           <img
             src={product.image}
@@ -82,7 +81,7 @@ async function handleReviewSubmit(e) {
           />
         </div>
 
-        {/* DETAILS RIGHT */}
+        
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
           <h1 style={{ fontSize: "42px", marginBottom: "10px", fontWeight: "700", color: "#111" }}>{product.name}</h1>
           <p style={{ fontSize: "28px", color: "#d32f2f", fontWeight: "600", marginBottom: "20px" }}>৳{product.price}</p>
@@ -122,17 +121,17 @@ async function handleReviewSubmit(e) {
       <hr style={{ border: "0", borderTop: "1px solid #eee", margin: "60px 0" }} />
       <div>
   <h3>{product.name}</h3>
-  {/* Add this line to show the rating */}
+
   <div className="rating">
     Rating: ⭐ {product.average_rating || "No reviews yet"} 
     <span> ({product.review_count} reviews)</span>
   </div>
 </div>
 
-      {/* LOWER SECTION: REVIEWS */}
+
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "80px" }}>
         
-        {/* REVIEW FORM */}
+        
         <div>
           <h3 style={{ fontSize: "24px", marginBottom: "25px" }}>Customer Feedback</h3>
           <form onSubmit={handleReviewSubmit} style={{ background: "#fcfcfc", padding: "30px", borderRadius: "12px", border: "1px solid #f0f0f0" }}>
@@ -163,7 +162,7 @@ async function handleReviewSubmit(e) {
           </form>
         </div>
 
-        {/* REVIEW LIST */}
+
         <div>
           <h3 style={{ fontSize: "24px", marginBottom: "25px" }}>Reviews ({reviews.length})</h3>
           {reviews.length === 0 ? (

@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 
 function Activate() {
-  const { uid, token } = useParams(); // Grabs /activate/:uid/:token from URL
+  const { uid, token } = useParams();
   const navigate = useNavigate();
-  const [status, setStatus] = useState("loading"); // loading, success, error
+  const [status, setStatus] = useState("loading");
 
   useEffect(() => {
     async function activateAccount() {
@@ -15,7 +15,6 @@ function Activate() {
 
         if (res.ok) {
           setStatus("success");
-          // Auto-redirect to login after 3 seconds
           setTimeout(() => navigate("/login"), 4000);
         } else {
           setStatus("error");

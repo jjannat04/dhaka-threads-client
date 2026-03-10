@@ -9,7 +9,6 @@ const AdminDashboard = () => {
     const [allProducts, setAllProducts] = useState([]);
     const token = localStorage.getItem('token');
 
-    // Modal & Form State
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingProduct, setEditingProduct] = useState(null);
     const [productForm, setProductForm] = useState({
@@ -17,9 +16,9 @@ const AdminDashboard = () => {
         description: "",
         price: "",
         stock: "",
-        category: "", // Added: Required for ForeignKey
-        size: "M",    // Added: Default choice
-        color: "Black", // Added: Default choice
+        category: "", 
+        size: "M",    
+        color: "Black", 
         image: null
     });
 
@@ -306,7 +305,6 @@ const AdminDashboard = () => {
                                 </div>
                             </div>
 
-                            {/* Row for Category and Size */}
                             <div className="form-row">
                                 <div className="input-group">
                                     <label>Category ID</label>
@@ -327,7 +325,6 @@ const AdminDashboard = () => {
                                 </div>
                             </div>
 
-                            {/* Row for Color and Image upload label */}
                             <div className="form-row">
                                 <div className="input-group">
                                     <label>Color</label>
