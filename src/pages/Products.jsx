@@ -180,20 +180,29 @@ function Products() {
                     bottom: "15px",
                     left: "15px",
                     right: "15px",
-                    background: "#111",
+                    background: "rgba(17, 17, 17, 0.9)", 
                     color: "white",
                     border: "none",
-                    padding: "12px",
+                    padding: "14px", 
                     borderRadius: "8px",
-                    fontWeight: "600",
+                    fontWeight: "700",
                     cursor: "pointer",
-                    opacity: "0",
-                    transform: "translateY(10px)",
-                    transition: "all 0.3s ease",
-                    zIndex: 2
+                    opacity: "1",      
+                    transform: "translateY(0)", 
+                    transition: "background 0.3s ease, transform 0.2s ease", 
+                    zIndex: 2,
+                    backdropFilter: "blur(4px)", 
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "#000";
+                    e.currentTarget.style.transform = "scale(1.02)"; 
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "rgba(17, 17, 17, 0.9)";
+                    e.currentTarget.style.transform = "scale(1)";
                   }}
                 >
-                  Add to Bag
+                  Add to Cart
                 </button>
               </div>
 
