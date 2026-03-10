@@ -45,20 +45,7 @@ function Home() {
                 Explore Collection
               </button>
             </Link>
-            <button
-              style={{
-                padding: "15px 35px",
-                background: "transparent",
-                color: "#111",
-                border: "1px solid #111",
-                borderRadius: "4px",
-                fontSize: "16px",
-                fontWeight: "600",
-                cursor: "pointer"
-              }}
-            >
-              Our Story
-            </button>
+            
           </div>
         </div>
 
