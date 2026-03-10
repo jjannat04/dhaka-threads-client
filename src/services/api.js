@@ -17,11 +17,23 @@ export async function getProductReviews(id) {
 }
 
 export async function createReview(reviewData) {
+  const token = localStorage.getItem("token"); // Get the logged-in user's token
+
   const response = await fetch(`${API_BASE}/reviews/`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { 
+      "Content-Type": "application/json",
+      "Authorization": `Token ${token}` // Send the token to Django
+    },
     body: JSON.stringify(reviewData),
   });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    console.error("Review Error:", errorData);
+    throw new Error("Failed to post review");
+  }
+
   return await response.json();
 }
 

@@ -33,11 +33,18 @@ function ProductDetail() {
   useEffect(() => {
     loadData();
   }, [loadData]); // loadData is now a stable dependency
+async function handleReviewSubmit(e) {
+  e.preventDefault();
+  const token = localStorage.getItem("token");
 
-  async function handleReviewSubmit(e) {
-    e.preventDefault();
-    if (!comment.trim()) return;
+  if (!token) {
+    alert("Please login to post a review!");
+    return;
+  }
 
+  if (!comment.trim()) return;
+
+  try {
     await createReview({
       product: id,
       rating: rating,
@@ -46,9 +53,12 @@ function ProductDetail() {
 
     setComment("");
     setRating(5);
-    await loadData(); 
+    await loadData(); // Refresh list
+    alert("Review posted successfully!");
+  } catch  {
+    alert("Could not post review. Make sure you are logged in.");
   }
-
+}
   if (loading) return (
     <div style={{ display: "flex", justifyContent: "center", padding: "100px", fontSize: "20px" }}>
       Gathering details...
