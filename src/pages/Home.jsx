@@ -219,40 +219,7 @@ function Home() {
       </section>
 
       {/* --- FOOTER --- */}
-      <footer style={{ padding: "100px 8% 40px 8%", background: "#000", color: "#fff" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "60px", marginBottom: "80px" }}>
-          <div>
-            <h3 style={{ fontSize: "28px", fontWeight: "900", marginBottom: "20px" }}>DHAKA THREADS.</h3>
-            <p style={{ color: "#666" }}>Elevating traditional silhouettes for a modern world.</p>
-          </div>
-          <div>
-            <h4 style={{ fontWeight: "700", marginBottom: "25px" }}>Collections</h4>
-            <ul style={{ listStyle: "none", padding: 0, color: "#666", lineHeight: "2.5" }}>
-              <li><Link to="/products" style={{ color: "inherit", textDecoration: "none" }}>Shop All</Link></li>
-              <li>New Arrivals</li>
-              <li>Limited Drops</li>
-            </ul>
-          </div>
-          <div>
-            <h4 style={{ fontWeight: "700", marginBottom: "25px" }}>Help</h4>
-            <ul style={{ listStyle: "none", padding: 0, color: "#666", lineHeight: "2.5" }}>
-              <li>Shipping</li>
-              <li>Returns</li>
-              <li>Contact Us</li>
-            </ul>
-          </div>
-          <div>
-            <h4 style={{ fontWeight: "700", marginBottom: "25px" }}>Social</h4>
-            <div style={{ display: "flex", gap: "20px", color: "#666" }}>
-              <span>Instagram</span>
-              <span>Facebook</span>
-            </div>
-          </div>
-        </div>
-        <div style={{ borderTop: "1px solid #111", paddingTop: "40px", textAlign: "center", color: "#333", fontSize: "14px" }}>
-          <p>© 2026 Dhaka Threads. Handmade in Bangladesh.</p>
-        </div>
-      </footer>
+      
     </div>
   );
 }
