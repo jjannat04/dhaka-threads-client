@@ -2,6 +2,7 @@ Dhaka Threads | Frontend Architecture
 A high-end, editorial-inspired e-commerce interface developed with React.js. This project focuses on sophisticated UI/UX design, modular component architecture, and efficient state management to deliver a premium boutique shopping experience.
 
 View Live Demo: https://dhaka-threads-client.vercel.app/
+
 Backend Repository: https://github.com/jjannat04/dhaka-threads-backend
 
 Technical Overview
