@@ -1,34 +1,117 @@
-Dhaka Threads | Frontend Architecture
-A high-end, editorial-inspired e-commerce interface developed with React.js. This project focuses on sophisticated UI/UX design, modular component architecture, and efficient state management to deliver a premium boutique shopping experience.
+# 🛍️ Dhaka Threads — Full-Stack E-Commerce Platform
 
-View Live Demo: https://dhaka-threads-client.vercel.app/
+A modern, production-grade **fashion e-commerce platform** built with React.js and Django REST Framework. Features real-time product filtering, persistent cart/wishlist, JWT-secured authentication, and an editorial-style mobile-first UI.
 
-Backend Repository: https://github.com/jjannat04/dhaka-threads-backend
+🌐 **Live Demo:** [dhaka-threads-client.vercel.app](https://dhaka-threads-client.vercel.app/)
+&nbsp;|&nbsp;
+💻 **Frontend Repo:** [github.com/jjannat04/dhaka-threads-client](https://github.com/jjannat04/dhaka-threads-client)
+&nbsp;|&nbsp;
+🔧 **Backend Repo:** [github.com/jjannat04/dhaka-threads-backend](https://github.com/jjannat04/dhaka-threads-backend)
 
-Technical Overview
-The frontend is engineered to bridge the gap between traditional retail platforms and high-fashion digital experiences. It utilizes modern CSS techniques and React’s functional paradigm to ensure performance and scalability.
+---
 
-Core Features
-Editorial Hero Engine: A custom-built, dynamic carousel with optimized transition logic and mobile-responsive text scaling.
-Global State Management: Implemented via React Context API to synchronize Cart and Wishlist states across disparate routes without performance degradation.
-Responsive Layout Logic: Utilizes a hybrid grid/flexbox system that adapts layout structures (e.g., sticky sidebars vs. stacked components) based on viewport analysis.
-Asynchronous Discovery: A seamless filtering system integrated with RESTful endpoints to allow real-time product sorting by attributes such as size, color, and category.
-Secure Authentication Flow: Fully integrated with JWT-based backend protocols to manage protected routes and authenticated user actions.
+## 📸 Preview
 
-Technology Stack
-Library: React 18
-Routing: React Router 6
-State Management: Context API
-Styling: CSS3 (Advanced Grid, Flexbox, Keyframe Animations)
-Data Fetching: Fetch API / Axios
+> _Add a screenshot of your storefront or product page here._
+> `![App Screenshot](./screenshots/home.png)`
 
-Architecture Design
-The project follows a modular directory structure to ensure maintainability:
+---
 
-/components: Reusable UI elements (Buttons, Inputs, Toasts).
+## 🧩 Tech Stack
 
-/context: Global state providers for Cart and Wishlist logic.
+| Layer | Technology |
+|-------|-----------|
+| Frontend | React.js, Context API, CSS3 |
+| Backend | Django, Django REST Framework (DRF) |
+| Database | PostgreSQL / SQLite |
+| Auth | JWT (JSON Web Token) |
+| Deployment | Vercel (Frontend) |
 
-/pages: Route-level components (Home, Products, ProductDetail, Cart).
+---
 
-/services: API abstraction layers for backend communication.
+## ✨ Features
+
+- 🔍 **Real-Time Product Filtering** — Dynamic product engine with async API fetching; filters by category, price, and more without page reloads
+- 🛒 **Persistent Cart & Wishlist** — Global state management via React Context API; cart and wishlist survive across page navigation
+- 🔐 **JWT Authentication** — Secure login/register flow with token-based auth protecting all user-specific actions
+- ⭐ **Review & Rating System** — Verified users can leave product reviews and star ratings
+- 📱 **Mobile-First UI** — Editorial-style design with glassmorphism effects and smooth CSS transitions, fully responsive
+- 👤 **User Dashboard** — Personalized profile with order history and wishlist management
+
+---
+
+## 📦 Frontend Dependencies
+
+```json
+{
+  "react": "^18.x",
+  "react-dom": "^18.x",
+  "react-router-dom": "^6.x",
+  "axios": "^1.x"
+}
+```
+
+> Full list in [`package.json`](./package.json)
+
+---
+
+## 🚀 Run Locally
+
+### Prerequisites
+- Node.js >= 18
+- Backend server running (see [backend repo](https://github.com/jjannat04/dhaka-threads-backend))
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/jjannat04/dhaka-threads-client.git
+cd dhaka-threads-client
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Configure Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
+REACT_APP_API_URL=http://127.0.0.1:8000/api
+```
+
+### 4. Start the Development Server
+
+```bash
+npm start
+```
+
+Open your browser at 👉 `http://localhost:3000`
+
+---
+
+## 🔗 Relevant Links
+
+| Resource | Link |
+|----------|------|
+| 🌐 Live Demo | [dhaka-threads-client.vercel.app](https://dhaka-threads-client.vercel.app/) |
+| 💻 Frontend Repo | [github.com/jjannat04/dhaka-threads-client](https://github.com/jjannat04/dhaka-threads-client) |
+| 🔧 Backend Repo | [github.com/jjannat04/dhaka-threads-backend](https://github.com/jjannat04/dhaka-threads-backend) |
+| 👤 Developer | [linkedin.com/in/jannatul-ferdous-b504831b3](https://www.linkedin.com/in/jannatul-ferdous-b504831b3/) |
+
+---
+
+## 👩‍💻 Author
+
+**Jannatul Ferdous**
+CSE Undergraduate @ CUET | Django & React Developer
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jannatul-ferdous-b504831b3/)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/jjannat04)
+[![Codeforces](https://img.shields.io/badge/Codeforces-1F8ACB?style=flat&logo=codeforces&logoColor=white)](https://codeforces.com/profile/jjasperruby)
+
+---
+
+> ⭐ If you found this project useful, consider giving it a star!
