@@ -12,7 +12,6 @@ A modern, production-grade **fashion e-commerce platform** built with React.js a
 
 ## 📸 Preview
 
-> _Add a screenshot of your storefront or product page here._
 > ![App Screenshot](./screenshots/home.png)
 > ![App Screenshot](./screenshots/home2.png)
 
